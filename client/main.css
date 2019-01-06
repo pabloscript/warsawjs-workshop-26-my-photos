@@ -1,0 +1,14 @@
+.thumbnail {
+    border: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.thumbnail img {
+    padding: 15px 0;
+    cursor: pointer;
+}
+
+.full {
+    padding: 15px 0;
+}
