@@ -90,7 +90,7 @@ function handleSearchForm(photos) {
 
     $inputWrapper.classList.add('input-group', 'input-group-lg');
     $inputDescription.classList.add('input-group-addon');
-    $inputDescription.innerText = 'Search by keyword:';
+    $inputDescription.innerText = 'Search:';
     $input.classList.add('form-control');
     $inputWrapper.appendChild($inputDescription);
     $inputWrapper.appendChild($input);
