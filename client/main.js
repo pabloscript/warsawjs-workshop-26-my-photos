@@ -8,8 +8,7 @@ function setup() {
     .then(photos => {
         addPageHeader();
         render(photos);
-        handleSearchForm(photos);
-        showLargePhoto(photos[0]);
+        zoomPhoto(photos[0]);
     })
     .catch(error => console.error('Something went wrong: ', error));
 }
@@ -36,7 +35,7 @@ function render(photos) {
         const $img = document.createElement('img');
         $img.setAttribute('src', photo.thumb);
         $imgThumbnailWrapper.classList.add('thumbnail');
-        $img.addEventListener('click', () => showLargePhoto(photo));
+        $img.addEventListener('click', () => zoomPhoto(photo));
         $imgThumbnailWrapper.appendChild($img);
     });
 }
@@ -49,7 +48,7 @@ function removeElement(sel) {
     }
 }
 
-function showLargePhoto(photo) {
+function zoomPhoto(photo) {
     removeElement('.full');
 
     const $area = document.querySelector('#app');
@@ -80,32 +79,6 @@ function displayPhotoDetails(photo) {
     $detailsWrapper.classList.add('details');
     $detailsWrapper.innerHTML = template;
     $area.appendChild($detailsWrapper);
-}
-
-function handleSearchForm(photos) {
-    const $area = document.querySelector('#app');
-    const $inputWrapper = document.createElement('div');
-    const $inputDescription = document.createElement('span');
-    const $input = document.createElement('input');
-
-    $inputWrapper.classList.add('input-group', 'input-group-lg');
-    $inputDescription.classList.add('input-group-addon');
-    $inputDescription.innerText = 'Search:';
-    $input.classList.add('form-control');
-    $inputWrapper.appendChild($inputDescription);
-    $inputWrapper.appendChild($input);
-    $area.appendChild($inputWrapper);
-
-    const value = $input.value;
-
-    $input.addEventListener('keypress', () => {
-        const filteredPhotos = photos.filter(photo => photo.title.toLowerCase()
-        .match(value.toLowerCase()));
-
-        render(filteredPhotos);
-
-    });
-
 }
 
 document.addEventListener('DOMContentLoaded', setup);
